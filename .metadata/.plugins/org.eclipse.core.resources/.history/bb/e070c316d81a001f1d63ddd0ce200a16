@@ -12,7 +12,6 @@ csv.batch.size=10000
 csv.thread.num=3
 
 
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 
 spring.datasource.url=jdbc:postgres://username:K1R6BCPr4xgVpANXd4XF26BWyf0wgOpU@dpg-cp93jtn109ks73a3hjug-a/weather_advu
 spring.datasource.username=username
