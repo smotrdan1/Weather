@@ -1,0 +1,21 @@
+package com.app.Weather.beans;
+
+import java.time.LocalDateTime;
+
+public class ValidationResponse {
+	private String response;
+    private boolean isValid;
+
+    public ValidationResponse(String response, boolean isValid) {
+        this.setResponse(response);
+        this.isValid = isValid;
+    }
+
+	public String getResponse() {
+		return response;
+	}
+
+	public void setResponse(String response) {
+		this.response = response;
+	}
+}

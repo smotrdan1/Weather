@@ -1,0 +1,19 @@
+package com.app.Weather.controllers;
+
+@RestController
+@RequestMapping("/weather")
+public class WeatherController {
+
+    @Autowired
+    private WeatherService weatherService; // Assuming you have a WeatherService class
+
+    @GetMapping("/insight")
+    public ResponseEntity<List<WeatherInsight>> getWeatherInsight(
+            @RequestParam Double lon,
+            @RequestParam Double lat,
+            @RequestParam String condition) {
+
+        List<WeatherInsight> insights = weatherService.getWeatherInsight(lon, lat, condition);
+        return ResponseEntity.ok(insights);
+    }
+}

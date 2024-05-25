@@ -1,0 +1,95 @@
+package com.app.Weather.service;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import com.app.Weather.beans.Weather;
+import com.app.Weather.repository.WeatherRepository;
+
+@Service
+public class CSVService {
+
+
+    @Value("${csv.file.path1}")
+    private String csvFilePath1;
+    
+    @Value("${csv.file.path2}")
+    private String csvFilePath2;
+    
+    @Value("${csv.file.path3}")
+    private String csvFilePath3;
+	
+    @Autowired
+    private WeatherRepository weatherRepository;
+    
+    
+    
+
+    private final List<String> csvFiles = Arrays.asList(
+    		csvFilePath1,
+    		csvFilePath2,
+    		csvFilePath3
+    );
+
+    private static final int THREAD_POOL_SIZE = 5; 
+    private static final int BATCH_SIZE = 5000; 
+
+    public void loadCSVData() {
+        ExecutorService executor = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+        for (String filePath : csvFiles) {
+            executor.execute(() -> processCSVFile(filePath));
+        }
+        executor.shutdown();
+        try {
+            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private void processCSVFile(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            boolean skipHeader = true;
+            List<Weather> weatherBatch = new ArrayList<>(BATCH_SIZE);
+            while ((line = br.readLine()) != null) {
+                if (skipHeader) {
+                    skipHeader = false;
+                    continue;
+                }
+                String[] data = line.split(",");
+                Weather weather = new Weather();
+                weather.setLongitude(Double.parseDouble(data[0]));
+                weather.setLatitude(Double.parseDouble(data[1]));
+                weather.setForecastTime(LocalDateTime.parse(data[2], DateTimeFormatter.ISO_DATE_TIME));
+                weather.setTemperature(Double.parseDouble(data[3]));
+                weather.setPrecipitation(Double.parseDouble(data[4]));
+                weatherBatch.add(weather);
+                if (weatherBatch.size() >= BATCH_SIZE) {
+                    saveBatch(weatherBatch);
+                    weatherBatch.clear();
+                }
+            }
+            // Save the remaining batch
+            saveBatch(weatherBatch);
+        } catch (IOException e) {
+            throw new RuntimeException("Error loading CSV file: " + filePath, e);
+        }
+    }
+
+    private void saveBatch(List<Weather> weatherBatch) {
+        weatherRepository.saveAll(weatherBatch);
+    }
+}
+
