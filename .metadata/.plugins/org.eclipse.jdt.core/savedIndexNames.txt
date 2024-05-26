@@ -73,7 +73,6 @@ INDEX VERSION 1.134+C:\Users\danie\Projects\test\Weather\.metadata\.plugins\org.
 61867842.index
 2035817676.index
 3233112805.index
-2041187436.index
 3156428045.index
 2951291034.index
 1061760688.index
