@@ -25,43 +25,40 @@ public class CSVService {
 
 
     @Value(Constants.csv.CSV_FILE_PATH_ONE)
-    private String csvFilePath1;
+	public String csvFilePath1;
     
     @Value(Constants.csv.CSV_FILE_PATH_TWO)
-    private String csvFilePath2;
+    public String csvFilePath2;
     
     @Value(Constants.csv.CSV_FILE_PATH_THREE)
-    private String csvFilePath3;
+    public String csvFilePath3;
     
     @Value(Constants.csv.CSV_THREAD_NUM)
-    private String THREAD_POOL_SIZE;
+    public String THREAD_POOL_SIZE;
     
     @Value(Constants.csv.CSV_BATCH_SIZE)
-    private String BATCH_SIZE;
+    public String BATCH_SIZE;
     
     
 	
     @Autowired
-    private WeatherRepository weatherRepository;
+	public WeatherRepository weatherRepository;
     
     private  List<String> csvFiles = null;
     
+    
+    /**
+     * Initializes the list of CSV file paths after the dependency injection is complete.
+     */
     @PostConstruct
     public void init() {
         // Initialize csvFiles after @Value injection
         csvFiles = Arrays.asList(csvFilePath1, csvFilePath2, csvFilePath3);
     }
     
-
-//    private final List<String> csvFiles = Arrays.asList(
-//    		csvFilePath1,
-//    		csvFilePath2,
-//    		csvFilePath3
-//    );
-
-//    private static final int THREAD_POOL_SIZE = Integer.parseInt(threadPoolSize); 
-//    private static final int BATCH_SIZE = 5000; 
-
+    /**
+     * Initiates the process of loading data from all CSV files concurrently using a thread pool.
+     */
     public void loadCSVData() {
         ExecutorService executor = Executors.newFixedThreadPool(Integer.parseInt(THREAD_POOL_SIZE));
         for (String filePath : csvFiles) {
@@ -75,6 +72,12 @@ public class CSVService {
         }
     }
 
+    /**
+     * Reads the CSV file line by line, converts each line into a Weather object,
+     * and batches the objects for database insertion.
+     * 
+     * @param filePath the path to the CSV file to be processed.
+     */
     private void processCSVFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -105,6 +108,12 @@ public class CSVService {
         }
     }
 
+    
+    /**
+     * Saves a batch of Weather objects to the repository.
+     * 
+     * @param weatherBatch the list of Weather objects to be saved.
+     */
     private void saveBatch(List<Weather> weatherBatch) {
         weatherRepository.saveAll(weatherBatch);
     }

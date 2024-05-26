@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.Weather.constants.Constants;
 import com.app.Weather.service.CSVService;
 
+
+
+/**
+ * CSVController handles HTTP requests for loading CSV data.
+ * Provides an endpoint to trigger the data loading process.
+ */
 @RestController
 @RequestMapping(Constants.csv.CSV_PATH)
 public class CSVController {
@@ -21,6 +27,14 @@ public class CSVController {
     @Autowired
     private CSVService csvService;
 
+    
+    /**
+     * Handles the HTTP GET request to load CSV data.
+     * 
+     * @return ResponseEntity containing the status and message of the operation.
+     *         - HTTP 200 status with a success message if the operation is successful.
+     *         - HTTP 500 status with an error message if the operation fails.
+     */
     @GetMapping(Constants.csv.DIGEST)
     public ResponseEntity<?> loadCSVData() {
         try {

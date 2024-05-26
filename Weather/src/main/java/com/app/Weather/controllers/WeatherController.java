@@ -16,6 +16,10 @@ import com.app.Weather.beans.WeatherInsight;
 import com.app.Weather.constants.Constants;
 import com.app.Weather.service.WeatherService;
 
+
+/**
+ * WeatherController handles HTTP requests for weather insights.
+ */
 @RestController
 @RequestMapping(Constants.weather.WEATHER_PATH)
 public class WeatherController {
@@ -23,6 +27,18 @@ public class WeatherController {
     @Autowired
     private WeatherService weatherService;
 
+    
+    /**
+     * Handles the HTTP GET request to retrieve weather insights based on provided parameters.
+     * 
+     * @param lon       The longitude coordinate.
+     * @param lat       The latitude coordinate.
+     * @param condition The weather condition for which insights are requested.
+     * @return ResponseEntity containing weather insights as a list of WeatherInsight objects.
+     *         - HTTP 200 status with the list of weather insights if the operation is successful.
+     *         - HTTP 400 status with an error message if the parameters are invalid or the condition is unknown.
+     *         - HTTP 500 status with a generic error message if an unexpected error occurs.
+     */
     @GetMapping(Constants.weather.INSIGHT)
     public ResponseEntity<?> getWeatherInsight(
             @RequestParam Double lon,
