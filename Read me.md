@@ -103,6 +103,7 @@ List of potential optimizations and pitfalls in the solution:
 2. Optimization: Implement continuous data flow for real-time updates.
 3. Pitfall: Ensuring accuracy in latitude and longitude queries to avoid misleading results.
 4. Optimization: Optimizing the number of threads and the batch size.
+5. Optimization: Add unit tests to test the application.
 
 
 ### Assumptions
