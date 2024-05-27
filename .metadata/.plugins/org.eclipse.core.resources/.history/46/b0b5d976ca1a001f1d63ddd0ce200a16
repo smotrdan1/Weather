@@ -1,0 +1,17 @@
+package com.app.Weather.beans;
+
+import org.springframework.http.HttpStatus;
+
+public class ValidationResponse extends RuntimeException{
+	   private final String message;
+
+	    public ValidationException(String message) {
+	        this.message = message;
+	    }
+
+	    @Override
+	    public String getMessage() {
+	        return message;
+	    }
+	}
+}

@@ -1,0 +1,30 @@
+//package com.app.Weather.beans;
+//
+//import org.springframework.http.HttpStatus;
+//
+//public class ValidationResponse {
+//	private HttpStatus response;
+//    private String Validation;
+//    
+//
+//    public ValidationResponse(HttpStatus response, String string) {
+//        this.setResponse(response);
+//        this.setValid(string);
+//    }
+//
+//	public HttpStatus getResponse() {
+//		return response;
+//	}
+//
+//	public void setResponse(HttpStatus response) {
+//		this.response = response;
+//	}
+//
+//	public boolean isValid() {
+//		return isValid;
+//	}
+//
+//	public void setValid(boolean isValid) {
+//		this.isValid = isValid;
+//	}
+//}

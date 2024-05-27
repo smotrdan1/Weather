@@ -1,0 +1,43 @@
+package com.app.Weather;
+
+import static org.mockito.Mockito.*;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.app.Weather.beans.Weather;
+import com.app.Weather.repository.WeatherRepository;
+import com.app.Weather.service.CSVService;
+
+@ExtendWith(MockitoExtension.class)
+class CSVServiceTest {
+
+    @Mock
+    private WeatherRepository weatherRepositoryMock;
+
+    @Test
+    void testProcessCSVFile() throws IOException {
+        CSVService csvService = new CSVService(weatherRepositoryMock);
+
+        String testLine = "10,20,2021-01-01T12:00:00,25.0,0.1";
+        BufferedReader bufferedReaderMock = mock(BufferedReader.class);
+        when(bufferedReaderMock.readLine()).thenReturn(testLine, null);
+
+        csvService.processCSVFile(bufferedReaderMock);
+
+        Weather expectedWeather = new Weather();
+        expectedWeather.setLongitude(10);
+        expectedWeather.setLatitude(20);
+        expectedWeather.setForecastTime(LocalDateTime.parse("2021-01-01T12:00:00"));
+        expectedWeather.setTemperature(25.0);
+        expectedWeather.setPrecipitation(0.1);
+
+        verify(weatherRepositoryMock).save(expectedWeather);
+    }
+}
+

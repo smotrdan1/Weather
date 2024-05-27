@@ -1,0 +1,8 @@
+FROM openjdk:17
+COPY target/Weather-0.0.1-SNAPSHOT.jar /app/Weather-0.0.1-SNAPSHOT.jar
+COPY target/file1.csv /app/file1.csv
+COPY target/file2.csv /app/file2.csv
+COPY target/file3.csv /app/file3.csv
+
+WORKDIR /app
+ENTRYPOINT ["java", "-jar", "Weather-0.0.1-SNAPSHOT.jar"]

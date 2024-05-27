@@ -1,0 +1,5 @@
+package com.app.Weather.controllers;
+
+public class WeatherController {
+
+}

@@ -1,0 +1,49 @@
+package com.app.Weather.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+
+@SuppressWarnings("deprecation")
+@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+//    @SuppressWarnings("deprecation")
+//	@Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                        .passwordEncoder(NoOpPasswordEncoder.getInstance())
+//                        .withUser("webtech").password("password").roles("ADMIN")
+//        				.and()
+//        				.withUser("amidar").password("12345678=a").roles("ADMIN");
+    
+
+private static final String[] AUTH_LIST = {
+        // -- swagger ui
+        "**/swagger-resources/**",
+        "/swagger-ui.html",
+        "/v2/api-docs",
+        "/webjars/**"
+};
+
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http
+    .authorizeRequests().antMatchers(AUTH_LIST).authenticated()
+    .and()
+    .httpBasic().authenticationEntryPoint(swaggerAuthenticationEntryPoint())
+    .and()
+    .csrf().disable();
+}
+
+@Bean
+public BasicAuthenticationEntryPoint swaggerAuthenticationEntryPoint() {
+    BasicAuthenticationEntryPoint entryPoint = new BasicAuthenticationEntryPoint();
+    entryPoint.setRealmName("Swagger Realm");
+    return entryPoint;
+}
+}

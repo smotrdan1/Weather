@@ -1,0 +1,28 @@
+package com.app.Weather.beans;
+
+
+public class ValidationResponse {
+	private String response;
+    private boolean isValid;
+
+    public ValidationResponse(String response, boolean isValid) {
+        this.setResponse(response);
+        this.setValid(isValid);
+    }
+
+	public String getResponse() {
+		return response;
+	}
+
+	public void setResponse(String response) {
+		this.response = response;
+	}
+
+	public boolean isValid() {
+		return isValid;
+	}
+
+	public void setValid(boolean isValid) {
+		this.isValid = isValid;
+	}
+}
