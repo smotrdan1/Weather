@@ -80,8 +80,8 @@ To trigger the CSV upload service and write the CSV data into the table, an inte
 https://weatherapp-ltx4.onrender.com/csv/digest
 
 ## example of retunred values:
-200 http status with "CSV data loaded successfully." for succsesful data writing.
-500 http status with "Failed to load CSV data" for failure.
+- 200 http status with "CSV data loaded successfully." for succsesful data writing.
+- 500 http status with "Failed to load CSV data" for failure.
 
 
 
@@ -104,9 +104,9 @@ List of potential optimizations and pitfalls in the solution:
 3. Pitfall: Ensuring accuracy in latitude and longitude queries to avoid misleading results.
 4. Optimization: Optimizing the number of threads and the batch size.
 5. Optimization: Add unit tests to test the application. Examples of unit tests include:
-    Validation Test: Ensure that the API correctly validates latitude, longitude, and condition parameters, returning appropriate error messages for invalid inputs.
-    Database Query Test: Verify that the database queries are executed correctly and return expected results for given latitude, longitude, and condition combinations.
-    Response Structure Test: Check that the API response structure is consistent and accurate, ensuring it contains the correct forecast times and condition met statuses based on the weather data.
+    - Validation Test: Ensure that the API correctly validates latitude, longitude, and condition parameters, returning appropriate error messages for invalid inputs.
+    - Database Query Test: Verify that the database queries are executed correctly and return expected results for given latitude, longitude, and condition combinations.
+    - Response Structure Test: Check that the API response structure is consistent and accurate, ensuring it contains the correct forecast times and condition met statuses based on the weather data.
 
 ### Assumptions
 List of assumptions made during the implementation:
@@ -120,7 +120,7 @@ List of assumptions made during the implementation:
 # Note: 
 This is not a production-ready service. While it provides basic functionality, additional optimization such as continuous data flow, using alternative data sources, improving accuracy in latitude and longitude queries, and deploying on servers with higher resources are recommended for production use. Additionally, making the service more resilient to massive loads of API calls is crucial for scalability and reliability.
 
-#### Important note
+### Important note
 ## Please be aware that responses may be slower due to resource constraints on the service.
 
 
