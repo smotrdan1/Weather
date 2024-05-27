@@ -103,8 +103,10 @@ List of potential optimizations and pitfalls in the solution:
 2. Optimization: Implement continuous data flow for real-time updates.
 3. Pitfall: Ensuring accuracy in latitude and longitude queries to avoid misleading results.
 4. Optimization: Optimizing the number of threads and the batch size.
-5. Optimization: Add unit tests to test the application.
-
+5. Optimization: Add unit tests to test the application. Examples of unit tests include:
+    Validation Test: Ensure that the API correctly validates latitude, longitude, and condition parameters, returning appropriate error messages for invalid inputs.
+    Database Query Test: Verify that the database queries are executed correctly and return expected results for given latitude, longitude, and condition combinations.
+    Response Structure Test: Check that the API response structure is consistent and accurate, ensuring it contains the correct forecast times and condition met statuses based on the weather data.
 
 ### Assumptions
 List of assumptions made during the implementation:
@@ -113,7 +115,12 @@ List of assumptions made during the implementation:
 
 2. Conditions specified in the query parameters (condition) must be case-sensitive and adhere to strict formatting rules. Any deviations result in a 400 BAD_REQUEST status with the appropriate error message.
 
+3. The get requet cover the case of blanks in between the double of longitude and latitude values. 
+
 # Note: 
 This is not a production-ready service. While it provides basic functionality, additional optimization such as continuous data flow, using alternative data sources, improving accuracy in latitude and longitude queries, and deploying on servers with higher resources are recommended for production use. Additionally, making the service more resilient to massive loads of API calls is crucial for scalability and reliability.
+
+#### Important note
+## Please be aware that responses may be slower due to resource constraints on the service.
 
 

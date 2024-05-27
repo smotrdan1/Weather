@@ -15,7 +15,10 @@ import com.app.Weather.beans.ValidationResponse;
 import com.app.Weather.beans.WeatherInsight;
 import com.app.Weather.constants.Constants;
 import com.app.Weather.service.WeatherService;
+import io.swagger.v3.oas.annotations.Operation;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 /**
  * WeatherController handles HTTP requests for weather insights.
@@ -39,12 +42,14 @@ public class WeatherController {
      *         - HTTP 400 status with an error message if the parameters are invalid or the condition is unknown.
      *         - HTTP 500 status with a generic error message if an unexpected error occurs.
      */
+    
     @GetMapping(Constants.weather.INSIGHT)
     public ResponseEntity<?> getWeatherInsight(
             @RequestParam Double lon,
             @RequestParam Double lat,
             @RequestParam String condition) {
         try {
+        	
             List<WeatherInsight> insights = weatherService.getWeatherInsight(lon, lat, condition);
             return ResponseEntity.ok(insights);
         } catch (ResponseStatusException e) {

@@ -55,7 +55,7 @@ public class WeatherService {
             boolean metCondition = false;
             if (condition.equals(Constants.weather.VERY_HOT)) {
                 metCondition = data.getTemperature() > 30;
-            } else if (condition.equals(Constants.weather.COLD_AND_RAINY)) {
+            } else if (condition.equals(Constants.weather.RAINY_AND_COLD)) {
                 metCondition = data.getTemperature() < 10 && data.getPrecipitation() > 0.5;
             }
             insights.add(new WeatherInsight(data.getForecastTime(), metCondition));
@@ -79,7 +79,7 @@ public class WeatherService {
     	if (lat < Integer.parseInt(Constants.weather.MIN_LATITUDE) || lat > Integer.parseInt(Constants.weather.MAX_LATITUDE)) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Constants.weather.INVALID_LATITUDE + Constants.weather.MIN_LATITUDE + " to " + Constants.weather.MAX_LATITUDE);
          }
-    	if (!condition.equals(Constants.weather.VERY_HOT) && !condition.equals(Constants.weather.COLD_AND_RAINY)) {
+    	if (!condition.equals(Constants.weather.VERY_HOT) && !condition.equals(Constants.weather.RAINY_AND_COLD)) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Constants.weather.INVALID_CONDITION);
          }
     	

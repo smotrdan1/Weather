@@ -1,9 +1,0 @@
-package com.app.Weather.constants;
-
-public class Constants {
-
-	
-	public static final String CSV_PATH = "/api/csv";
-	public static final String CSV_PATH = "digest";
-	
-}

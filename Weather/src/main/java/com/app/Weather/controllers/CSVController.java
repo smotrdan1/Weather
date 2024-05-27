@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.Weather.constants.Constants;
 import com.app.Weather.service.CSVService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
+
 
 
 /**
@@ -20,6 +25,7 @@ import com.app.Weather.service.CSVService;
  */
 @RestController
 @RequestMapping(Constants.csv.CSV_PATH)
+
 public class CSVController {
 
     private static final Logger logger = LoggerFactory.getLogger(CSVController.class);

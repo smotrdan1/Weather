@@ -30,7 +30,7 @@ public class Constants {
 		public static final String INSIGHT = "/insight";
 		
 		public static final String VERY_HOT = "veryHot";
-		public static final String COLD_AND_RAINY = "rainyAndCold";
+		public static final String RAINY_AND_COLD = "rainyAndCold";
 
 		public static final String MIN_LONGITUDE = "-180";
 		public static final String MAX_LONGITUDE = "180";
@@ -40,7 +40,7 @@ public class Constants {
 		
 		public static final String INVALID_LONGITUDE = "Invalid longitude. Valid range is -";
 		public static final String INVALID_LATITUDE = "Invalid latitude. Valid range is -";	
-		public static final String INVALID_CONDITION= "Invalid condition. Valid options are 'veryHot' or 'coldAndRainy'";	
+		public static final String INVALID_CONDITION= "Invalid condition. Valid options are 'veryHot' or 'rainyAndCold'";	
 
 
 
